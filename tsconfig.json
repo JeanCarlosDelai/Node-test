@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es2016",                                 
+    "module": "commonjs", 
+    "allowJs": true,
+    "outDir": "dist",
+    "rootDirs": [
+      "./src",
+      "./tests"
+    ],
+    "baseUrl": "./",
+    "esModuleInterop": true,  
+    "noImplicitAny": true, 
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,                   
+    "skipLibCheck": true                                
+  }
+}
