@@ -1,0 +1,27 @@
+{
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave":
+    {
+        "source.insertFinalNewline": "explicit",
+        "source.formatDocument": "explicit",
+        "source.fixAll.eslint": "explicit"
+    },
+    "material-icon-theme.activeIconPack": "nest",
+    "material-icon-theme.files.associations":
+    {
+        "*.dto.ts": "Nest-resolver",
+        "*.repository.ts": "Database",
+        "*.interface.ts": "Nest-resolver",
+        "*.config.ts": "Nest-resolver"
+    },
+    "material-icon-theme.folders.associations": 
+    {
+        "requests": "Connection",
+        "infra": "Tools",
+        "account": "Secure",
+        "repository": "Database",
+        "user": "Client",
+        "aws": "Aws",
+        "qualitech": "Api"
+    }
+}
