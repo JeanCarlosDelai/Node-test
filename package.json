@@ -13,7 +13,13 @@
     "style:fix": "prettier --write \"src/**/*.ts\" ",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "migration:create": "npm run typeorm -- migration:create src/shared/infra/typeorm/migrations -n",
-    "migration:run": "npm run typeorm -- migration:run -d src/shared/infra/typeorm/index.ts"
+    "migration:run": "npm run typeorm -- migration:run -d src/shared/infra/typeorm/index.ts",
+    "test": "vitest run --dir ./tests/unit",
+    "test:integration": "vitest run --dir ./tests/integration",
+    "test:watch": "vitest --dir ./tests/unit",
+    "test:cov": "vitest run --coverage --dir ./tests/unit",
+    "test:e2e": "vitest run --dir ./tests/e2e",
+    "test:mutation": "npx stryker run"
   },
   "keywords": [],
   "author": "",
