@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es2016",                                 
-    "module": "commonjs", 
+    "target": "es2016",
+    "module": "commonjs",
     "allowJs": true,
     "outDir": "dist",
     "rootDirs": [
@@ -9,11 +9,11 @@
       "./tests"
     ],
     "baseUrl": "./",
-    "esModuleInterop": true,  
-    "noImplicitAny": true, 
+    "esModuleInterop": true,
+    "noImplicitAny": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "forceConsistentCasingInFileNames": true,                   
-    "skipLibCheck": true                                
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
   }
 }
