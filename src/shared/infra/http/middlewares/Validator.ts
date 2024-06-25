@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { Schema } from 'joi';
-import { BadRequestError } from 'src/shared/errors/BadRequest.error';
+import { BadRequestError } from 'src/shared/errors/BadRequestError';
 
 export default (schema: Schema) =>
   (req: Request, _: Response, next: NextFunction) => {
@@ -9,14 +9,13 @@ export default (schema: Schema) =>
       stripUnknown: true,
       errors: {
         wrap: {
-          label: '',
+          label: ' ',
         },
       },
     });
 
     if (error) {
-      const validationErrors = error.details.map((detail) => (detail.message));
-      throw new BadRequestError(validationErrors);
+      throw new BadRequestError(error as any);
     } else {
       next();
     }

@@ -1,13 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import { INTERNAL_SERVER, SOMETHING_WRONG } from 'src/shared/consts/ErrorConsts';
-import { BadRequestError } from 'src/shared/errors/BadRequest.error';
-import { NotFoundError } from 'src/shared/errors/notFound.error';
-
-export interface CustomError {
-  statusCode?: number;
-  message?: string[];
-  error?: string;
-}
+import { BadRequestError } from 'src/shared/errors/BadRequestError';
+import { NotFoundError } from 'src/shared/errors/NotFoundError';
+import { CustomError } from './interfaces/CustomError.interface';
 
 export const ErrorHandlerMiddleware = (
   err: BadRequestError | NotFoundError | undefined,
@@ -18,10 +13,9 @@ export const ErrorHandlerMiddleware = (
   if (!err) {
     return next();
   }
-
   const customError: CustomError = {
     statusCode: err.statusCode || 500,
-    message: err.msg || [SOMETHING_WRONG],
+    message: err.message || SOMETHING_WRONG,
     error: err.error || INTERNAL_SERVER,
   };
 

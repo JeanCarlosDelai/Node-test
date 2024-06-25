@@ -4,7 +4,7 @@ import cors from 'cors';
 import usersRouter from 'src/modules/infra/http/routes/User.routes';
 import { ErrorHandlerMiddleware } from './middlewares/ErrorHandler';
 import { NotFound } from './middlewares/NotFound';
-import '../typeorm/index';
+import '../typeorm/dataSource';
 import '../../container/index';
 
 const app = express();

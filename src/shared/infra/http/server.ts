@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import 'dotenv/config';
-import { dataSource } from 'src/shared/infra/typeorm';
 import app from './app';
+import { dataSource } from '../typeorm/dataSource';
 
 dataSource.initialize().then(() => {
   const PORT = process.env.PORT || 3000;
