@@ -1,10 +1,9 @@
-/* eslint-disable prettier/prettier */
 import dotenv from 'dotenv';
 import swc from 'unplugin-swc'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { defineConfig } from 'vitest/config'
 
-dotenv.config();
+dotenv.config({ path: '.env.test' });
 
 export const userConfig = {
   plugins: [
@@ -15,10 +14,9 @@ export const userConfig = {
   ],
   test: {
     globals: true,
-    // include: ['**/*.test.ts'],
     root: './',
     coverage: {
-      exclude: ['**/*.module.ts', '**/*spec.ts', '**/*.filter.ts', '**/*config.ts', '**/*config.js', '**/*.interceptor.ts', '**/*.eslintrc.js', '**/*main.ts', '**/*swaggerSetup.ts ', '**/*config.mjs  ']
+      exclude: ['**/*spec.ts', '**/*.routes.ts', '**/*main.ts', '**/*app.ts', '**/*index.ts', '**/*server.ts', '**/*Table.ts', '**/*Schema.ts', '**/*.dto.ts']
     },
   },
 }
