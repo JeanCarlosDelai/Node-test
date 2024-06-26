@@ -2,25 +2,16 @@
 
 ## 📄 Descrição do projeto
 
-Este repositório tem a proposta de mostrar um projeto utilizando o framework nest abordando vários conceitos de Clean Code, SOLID, terraform para geração da infraestrutura, cognito para autenticação, controle de usuários e testes.
+Este repositório foi                                                     \stinado a 
 
 ## 🛠 Funcionalidades do Projeto
 
-- Cadastro de usuários
-- Exclusão de usuários
-- Listar informações do usuário
-- Login
-- Autenticação MFA no login
-- Alteração de senha
+- Cadastro de '''''''''usuários'''''''''
 
 ## 🚩 Requisitos
 
 - [Git](https://www.git-scm.com/downloads);
 - [NodeJS](https://nodejs.org/en/);
-
-<!-- ## 📺 Playlist no Youtube sobre o projeto
-
-- [Youtube]() -->
 
 ## 💻 Como iniciar
 
@@ -57,6 +48,8 @@ cp .env.example .env
 ```sh
 npm run migration:run
 ```
+
+- Se optar por rodar em modo de produção
 
 ```sh
 npm run build
