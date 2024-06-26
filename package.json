@@ -2,7 +2,7 @@
   "name": "node-test",
   "version": "1.0.0",
   "description": "Repositório voltado a simplificar e mostrar como fazer testes no node.js",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
     "build": " npx tsc",
@@ -22,9 +22,10 @@
     "test:mutation": "npx stryker run"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jean Carlos Delai Vieceli",
   "license": "ISC",
   "devDependencies": {
+    "@stryker-mutator/vitest-runner": "^8.2.6",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/jest": "^29.5.12",
@@ -51,6 +52,7 @@
     "joi": "^17.13.3",
     "reflect-metadata": "^0.2.2",
     "sqlite3": "^5.1.7",
+    "stryker": "^0.35.1",
     "supertest": "^7.0.0",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",

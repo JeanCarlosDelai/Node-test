@@ -3,3 +3,6 @@ node_modules/
 dist/
 coverage/
 *.db
+/reports
+# stryker temp files
+.stryker-tmp
