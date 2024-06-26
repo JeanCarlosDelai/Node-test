@@ -1,5 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import { BAD_REQUEST, INTERNAL_SERVER, NOT_FOUND, SOMETHING_WRONG } from 'src/shared/consts/ErrorConsts';
+import { BAD_REQUEST, INTERNAL_SERVER, NOT_FOUND } from 'src/shared/consts/ErrorConsts';
+import { SOMETHING_WRONG } from 'src/shared/consts/ErrorMessagesConsts';
+import { HttpStatusCode } from 'src/shared/enums/HttpStatusCodes';
 import { BadRequestError } from 'src/shared/errors/BadRequestError';
 import { NotFoundError } from 'src/shared/errors/NotFoundError';
 import { ErrorHandlerMiddleware } from 'src/shared/infra/http/middlewares/ErrorHandler';
@@ -34,7 +36,7 @@ describe('ErrorHandlerMiddleware', () => {
 
         expect(res.status).toHaveBeenCalledWith(500);
         expect(res.json).toHaveBeenCalledWith({
-            statusCode: 500,
+            statusCode: HttpStatusCode.INTERNAL_SERVER_ERROR,
             message: SOMETHING_WRONG,
             error: INTERNAL_SERVER,
         });
@@ -51,7 +53,7 @@ describe('ErrorHandlerMiddleware', () => {
 
         expect(res.status).toHaveBeenCalledWith(400);
         expect(res.json).toHaveBeenCalledWith({
-            statusCode: 400,
+            statusCode: HttpStatusCode.BAD_REQUEST,
             message: 'Bad Request Error',
             error: BAD_REQUEST,
         });
@@ -68,7 +70,7 @@ describe('ErrorHandlerMiddleware', () => {
 
         expect(res.status).toHaveBeenCalledWith(404);
         expect(res.json).toHaveBeenCalledWith({
-            statusCode: 404,
+            statusCode: HttpStatusCode.NOT_FOUND,
             message: 'Not Found Error',
             error: NOT_FOUND,
         });

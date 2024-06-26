@@ -1,3 +1,4 @@
+import { HttpStatusCode } from "src/shared/enums/HttpStatusCodes";
 import { NotFoundError } from "src/shared/errors/NotFoundError";
 
 describe('NotFoundError', () => {
@@ -6,6 +7,6 @@ describe('NotFoundError', () => {
         const notFoundError = new NotFoundError(message);
 
         expect(notFoundError.message).toBe(message);
-        expect(notFoundError.statusCode).toBe(404);
+        expect(notFoundError.statusCode).toBe(HttpStatusCode.NOT_FOUND);
     });
 });

@@ -90,7 +90,7 @@ describe('UsersRepository', () => {
     // Arrange
     const createUserDTO: CreateUserDTO = {
       name: 'test5',
-      email: 'test5@test.com',
+      email: 'test6@test.com',
       password: 'password',
     };
     const newUser = await repository.create(createUserDTO);

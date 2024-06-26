@@ -1,3 +1,4 @@
+import { HttpStatusCode } from "src/shared/enums/HttpStatusCodes";
 import { BadRequestError } from "src/shared/errors/BadRequestError";
 
 describe('BadRequestError', () => {
@@ -6,6 +7,6 @@ describe('BadRequestError', () => {
         const badRequestError = new BadRequestError(message);
 
         expect(badRequestError.message).toBe(message);
-        expect(badRequestError.statusCode).toBe(400);
+        expect(badRequestError.statusCode).toBe(HttpStatusCode.BAD_REQUEST);
     });
 });
