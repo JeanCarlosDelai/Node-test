@@ -87,10 +87,10 @@ describe('UsersRepositoryInMemory', () => {
       };
       await usersRepository.create(createUserDTO);
       //Act
-      const user = await usersRepository.findByEmail('john.doe@example.com');
+      const user = await usersRepository.findByEmail(createUserDTO.email);
       //Assert
       expect(user).not.toBeNull();
-      expect(user?.email).toBe(createUserDTO.email);
+      expect(user.email).toBe(createUserDTO.email);
     });
 
     it('should return null if user not found by email', async () => {
@@ -120,7 +120,7 @@ describe('UsersRepositoryInMemory', () => {
       expect(user?.id).toBe(createdUser.id);
     });
 
-    it('should return null if user not found by id', async () => {
+    it('should be possible to return null if user not found by id', async () => {
       //Arrange
       const ivalidId = 'non-existent-id';
       //Act
@@ -131,7 +131,7 @@ describe('UsersRepositoryInMemory', () => {
   });
 
   describe('save', () => {
-    it('should save an existing user', async () => {
+    it('should be possible to save an existing user', async () => {
       //Arrange
       const createUser: CreateUserDTO = {
         name: 'test7',
@@ -144,6 +144,37 @@ describe('UsersRepositoryInMemory', () => {
       //Assert
       expect(updatedUser.name).toBe(createUser.name);
       expect(updatedUser.id).toBe(newUser.id);
+    });
+
+    describe('remove', () => {
+      it('should be possible to remove a user', async () => {
+        // Arrange
+        const createUserDTO: CreateUserDTO = {
+          name: 'test8',
+          email: 'test8@example.com',
+          password: '123456',
+        };
+        const createdUser = await usersRepository.create(createUserDTO);
+        // Act
+        await usersRepository.remove(createdUser);
+        const user = await usersRepository.findById(createdUser.id);
+        // Assert
+        expect(user).toBeNull();
+      });
+
+      it('should not throw an error if trying to remove a non-existing user', async () => {
+        // Arrange
+        const nonExistentUser = {
+          id: 'non-existent-id',
+          name: 'non-existent',
+          email: 'non-existent@example.com',
+          password: '123456',
+          created_at: new Date(),
+          updated_at: new Date(),
+        };
+        // Act & Assert
+        await expect(usersRepository.remove(nonExistentUser)).resolves.not.toThrow();
+      });
     });
   });
 

@@ -23,9 +23,7 @@ export class UsersRepository implements IUsersRepository {
   }
 
   public async findAll(): Promise<IUser[]> {
-    return await this.ormRepository
-      .createQueryBuilder('users')
-      .getMany();
+    return await this.ormRepository.find()
   }
 
   public async findByName(name: string): Promise<IUser | null> {
