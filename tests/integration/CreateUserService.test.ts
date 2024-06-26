@@ -1,7 +1,5 @@
 import 'reflect-metadata'
 import { CreateUserDTO } from 'src/modules/domain/dtos/CreateUser.dto';
-import { UserRespondeDTO } from 'src/modules/domain/dtos/UserReponse.dto';
-import { IUser } from 'src/modules/domain/interfaces/User.interface';
 import { IUsersRepository } from 'src/modules/domain/interfaces/UserRepository.interfece';
 import { UsersRepositoryInMemory } from 'src/modules/infra/typeorm/repositories/inMemory/UsersRepositoryInMemory';
 import { CreateUserService } from 'src/modules/services/CreateUserService';

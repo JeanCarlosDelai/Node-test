@@ -1,6 +1,5 @@
 import { UsersRepositoryInMemory } from 'src/modules/infra/typeorm/repositories/inMemory/UsersRepositoryInMemory';
 import { CreateUserDTO } from 'src/modules/domain/dtos/CreateUser.dto';
-import { IUser } from 'src/modules/domain/interfaces/User.interface';
 
 describe('UsersRepositoryInMemory', () => {
   let usersRepository: UsersRepositoryInMemory;
@@ -14,13 +13,13 @@ describe('UsersRepositoryInMemory', () => {
     it('should be possible to find all users', async () => {
       //Arrange
       const createUserDTO1: CreateUserDTO = {
-        name: 'John Doe',
-        email: 'john.doe@example.com',
+        name: 'test1',
+        email: 'test1@example.com',
         password: '123456',
       };
       const createUserDTO2: CreateUserDTO = {
-        name: 'Jane Doe',
-        email: 'jane.doe@example.com',
+        name: 'test2',
+        email: 'test2@example.com',
         password: '654321',
       };
       await usersRepository.create(createUserDTO1);
@@ -37,8 +36,8 @@ describe('UsersRepositoryInMemory', () => {
     it('should be able to create a new user', async () => {
       //Arrange
       const createUserDTO: CreateUserDTO = {
-        name: 'John Doe',
-        email: 'john.doe@example.com',
+        name: 'test3',
+        email: 'test3@example.com',
         password: '123456',
       };
       //Act
@@ -55,8 +54,8 @@ describe('UsersRepositoryInMemory', () => {
     it('should be possible to find a user by name', async () => {
       //Arrange
       const createUserDTO: CreateUserDTO = {
-        name: 'John Doe',
-        email: 'john.doe@example.com',
+        name: 'test4',
+        email: 'test4@example.com',
         password: '123456',
       };
       //Act
@@ -80,22 +79,26 @@ describe('UsersRepositoryInMemory', () => {
   describe('findByEmail', () => {
 
     it('should be possible to find a user by email', async () => {
+      //Arrange
       const createUserDTO: CreateUserDTO = {
-        name: 'John Doe',
-        email: 'john.doe@example.com',
+        name: 'test5',
+        email: 'test5@example.com',
         password: '123456',
       };
-
       await usersRepository.create(createUserDTO);
+      //Act
       const user = await usersRepository.findByEmail('john.doe@example.com');
-
+      //Assert
       expect(user).not.toBeNull();
       expect(user?.email).toBe(createUserDTO.email);
     });
 
     it('should return null if user not found by email', async () => {
-      const user = await usersRepository.findByEmail('non.existent@example.com');
-
+      //Arrange
+      const invalidEMail = 'invalid@example.com';
+      //Act
+      const user = await usersRepository.findByEmail(invalidEMail);
+      //Assert
       expect(user).toBeNull();
     });
   });
@@ -103,41 +106,44 @@ describe('UsersRepositoryInMemory', () => {
   describe('findById', () => {
 
     it('should be possible to find a user by id', async () => {
+      //Arrange
       const createUserDTO: CreateUserDTO = {
-        name: 'John Doe',
-        email: 'john.doe@example.com',
+        name: 'test6',
+        email: 'test6@example.com',
         password: '123456',
       };
-
       const createdUser = await usersRepository.create(createUserDTO);
+      //Act
       const user = await usersRepository.findById(createdUser.id);
-
+      //Assert
       expect(user).not.toBeNull();
       expect(user?.id).toBe(createdUser.id);
     });
 
     it('should return null if user not found by id', async () => {
-      const user = await usersRepository.findById('non-existent-id');
-
+      //Arrange
+      const ivalidId = 'non-existent-id';
+      //Act
+      const user = await usersRepository.findById(ivalidId);
+      //Assert
       expect(user).toBeNull();
     });
   });
 
   describe('save', () => {
     it('should save an existing user', async () => {
-      const createUserDTO: CreateUserDTO = {
-        name: 'John Doe',
-        email: 'john.doe@example.com',
+      //Arrange
+      const createUser: CreateUserDTO = {
+        name: 'test7',
+        email: 'test7@example.com',
         password: '123456',
       };
-
-      const createdUser = await usersRepository.create(createUserDTO);
-      createdUser.name = 'John Updated Doe';
-
-      const updatedUser = await usersRepository.save(createdUser);
-
-      expect(updatedUser.name).toBe('John Updated Doe');
-      expect(updatedUser.id).toBe(createdUser.id);
+      const newUser = await usersRepository.create(createUser);
+      //Act
+      const updatedUser = await usersRepository.save(newUser);
+      //Assert
+      expect(updatedUser.name).toBe(createUser.name);
+      expect(updatedUser.id).toBe(newUser.id);
     });
   });
 

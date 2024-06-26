@@ -27,13 +27,14 @@ describe('ErrorHandlerMiddleware', () => {
     };
 
     it('Should return status 500 and default message for unknown errors', () => {
+        //Arrange
         const err = {};
         const req = createRequest();
         const res = createResponse();
         const next = createNext();
-
+        //Act
         ErrorHandlerMiddleware(err as undefined, req as Request, res as Response, next);
-
+        //Assert
         expect(res.status).toHaveBeenCalledWith(500);
         expect(res.json).toHaveBeenCalledWith({
             statusCode: HttpStatusCode.INTERNAL_SERVER_ERROR,
@@ -44,13 +45,14 @@ describe('ErrorHandlerMiddleware', () => {
     });
 
     it('Should return status 400 and correct message for BadRequestError', () => {
+        //Arrange
         const err = new BadRequestError('Bad Request Error');
         const req = createRequest();
         const res = createResponse();
         const next = createNext();
-
+        //Act
         ErrorHandlerMiddleware(err, req as Request, res as Response, next);
-
+        //Assert
         expect(res.status).toHaveBeenCalledWith(400);
         expect(res.json).toHaveBeenCalledWith({
             statusCode: HttpStatusCode.BAD_REQUEST,
@@ -61,13 +63,14 @@ describe('ErrorHandlerMiddleware', () => {
     });
 
     it('Should return status 404 and correct message for NotFoundError', () => {
+        //Arrange
         const err = new NotFoundError('Not Found Error');
         const req = createRequest();
         const res = createResponse();
         const next = createNext();
-
+        //Act
         ErrorHandlerMiddleware(err, req as Request, res as Response, next);
-
+        //Assert
         expect(res.status).toHaveBeenCalledWith(404);
         expect(res.json).toHaveBeenCalledWith({
             statusCode: HttpStatusCode.NOT_FOUND,
@@ -78,13 +81,14 @@ describe('ErrorHandlerMiddleware', () => {
     });
 
     it('Should call next() when there is no error', () => {
+        //Arrange
         const err: undefined = undefined;
         const req = createRequest();
         const res = createResponse();
         const next = createNext();
-
+        //Act
         ErrorHandlerMiddleware(err, req as Request, res as Response, next);
-
+        //Assert
         expect(res.status).not.toHaveBeenCalled();
         expect(res.json).not.toHaveBeenCalled();
         expect(next).toHaveBeenCalled();
