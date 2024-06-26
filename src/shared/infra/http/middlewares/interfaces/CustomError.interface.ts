@@ -1,5 +1,5 @@
 export interface CustomError {
     statusCode?: number;
-    message?: string;
+    message?: string | string[];
     error?: string;
 }

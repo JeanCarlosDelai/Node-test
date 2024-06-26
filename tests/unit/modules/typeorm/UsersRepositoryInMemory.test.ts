@@ -28,6 +28,8 @@ describe('UsersRepositoryInMemory', () => {
       const users = await usersRepository.findAll();
       //Assert
       expect(users).toHaveLength(2);
+      expect(users[0]).toEqual(expect.objectContaining(createUserDTO1));
+      expect(users[1]).toEqual(expect.objectContaining(createUserDTO2));
     });
   });
 
@@ -74,6 +76,19 @@ describe('UsersRepositoryInMemory', () => {
       //Assert
       expect(user).toBeNull();
     });
+
+    it('should not return incorrect user', async () => {
+      const createUserDTO: CreateUserDTO = {
+        name: 'test5',
+        email: 'test5@example.com',
+        password: '123456',
+      };
+
+      await usersRepository.create(createUserDTO);
+      const user = await usersRepository.findByName('someOtherName');
+
+      expect(user).toBeNull();
+    });
   });
 
   describe('findByEmail', () => {
@@ -101,6 +116,19 @@ describe('UsersRepositoryInMemory', () => {
       //Assert
       expect(user).toBeNull();
     });
+
+    it('should not return incorrect user', async () => {
+      const createUserDTO: CreateUserDTO = {
+        name: 'test6',
+        email: 'test6@example.com',
+        password: '123456',
+      };
+
+      await usersRepository.create(createUserDTO);
+      const user = await usersRepository.findByEmail('someOtherEmail@example.com');
+
+      expect(user).toBeNull();
+    });
   });
 
   describe('findById', () => {
@@ -126,6 +154,19 @@ describe('UsersRepositoryInMemory', () => {
       //Act
       const user = await usersRepository.findById(ivalidId);
       //Assert
+      expect(user).toBeNull();
+    });
+
+    it('should not return incorrect user', async () => {
+      const createUserDTO: CreateUserDTO = {
+        name: 'test6',
+        email: 'test6@example.com',
+        password: '123456',
+      };
+
+      await usersRepository.create(createUserDTO);
+      const user = await usersRepository.findById('invalidId');
+
       expect(user).toBeNull();
     });
   });
@@ -162,17 +203,38 @@ describe('UsersRepositoryInMemory', () => {
         expect(user).toBeNull();
       });
 
-      it('should not throw an error if trying to remove a non-existing user', async () => {
-        // Arrange
-        const nonExistentUser = {
-          id: 'non-existent-id',
-          name: 'non-existent',
-          email: 'non-existent@example.com',
+      it('should not remove any user when id does not match', async () => {
+        const createUserDTO: CreateUserDTO = {
+          name: 'testNotRemove',
+          email: 'testNotRemove@example.com',
           password: '123456',
-          created_at: new Date(),
-          updated_at: new Date(),
         };
-        // Act & Assert
+        const createdUser = await usersRepository.create(createUserDTO);
+
+        const nonExistentUser = {
+          ...createdUser,
+          id: 'non-existent-id',
+        };
+
+        await usersRepository.remove(nonExistentUser);
+        const user = await usersRepository.findById(createdUser.id);
+        expect(user).not.toBeNull();
+        expect(user?.id).toBe(createdUser.id);
+      });
+
+      it('should not throw an error if trying to remove a user with an invalid id', async () => {
+        const createUserDTO: CreateUserDTO = {
+          name: 'testInvalidIdRemove',
+          email: 'testInvalidIdRemove@example.com',
+          password: '123456',
+        };
+        const createdUser = await usersRepository.create(createUserDTO);
+
+        const nonExistentUser = {
+          ...createdUser,
+          id: 'invalid-id', // ID que não corresponde a nenhum usuário
+        };
+
         await expect(usersRepository.remove(nonExistentUser)).resolves.not.toThrow();
       });
     });

@@ -1,13 +1,14 @@
-import { VALITATION } from "../consts/ErrorConsts";
+import { VALIDATION } from "../consts/ErrorConsts";
 import { HttpStatusCode } from "../enums/HttpStatusCodes";
 
-export class ValidationError extends Error {
+export class ValidationError {
   statusCode: number;
+  message: string[];
   error: string;
 
-  constructor(message: string) {
-    super(message);
+  constructor(message: string[]) {
     this.statusCode = HttpStatusCode.BAD_REQUEST;
-    this.error = VALITATION;
+    this.message = message;
+    this.error = VALIDATION;
   }
 }

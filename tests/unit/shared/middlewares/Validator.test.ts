@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import Joi, { Schema } from 'joi';
+import { ValidationError } from 'src/shared/errors/ValidationError';
 import Validator from 'src/shared/infra/http/middlewares/Validator';
 import { vi } from 'vitest';
 
@@ -29,7 +30,7 @@ describe('Validator', () => {
         expect(next).toHaveBeenCalledTimes(1);
     });
 
-    it('Should throw a BadRequestError if the request is invalid', () => {
+    it('Should throw a ValidationError if the request is invalid', () => {
         //Arrange
         const schema: Schema = Joi.object({
             name: Joi.string().required(),
@@ -45,6 +46,6 @@ describe('Validator', () => {
         //Act & Assert
         expect(() =>
             middleware(req as Request, res as Response, vi.fn() as unknown as NextFunction),
-        ).toThrow(Error);
+        ).toThrow(ValidationError);
     });
 });

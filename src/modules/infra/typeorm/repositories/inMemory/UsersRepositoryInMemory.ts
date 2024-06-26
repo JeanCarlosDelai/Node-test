@@ -1,7 +1,7 @@
 import { CreateUserDTO } from "src/modules/domain/dtos/CreateUser.dto";
 import { IUser } from "src/modules/domain/interfaces/User.interface";
 import { IUsersRepository } from "src/modules/domain/interfaces/UserRepository.interfece";
-
+import { v4 as uuidv4 } from 'uuid';
 
 export class UsersRepositoryInMemory implements IUsersRepository {
     private users: IUser[] = [];
@@ -27,7 +27,7 @@ export class UsersRepositoryInMemory implements IUsersRepository {
 
     async create(createUserDTO: CreateUserDTO): Promise<IUser> {
         const user: IUser = {
-            id: (this.users.length + 1).toString(),
+            id: uuidv4(),
             ...createUserDTO,
             created_at: new Date(),
             updated_at: new Date(),
