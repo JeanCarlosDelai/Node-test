@@ -1,6 +1,7 @@
 import { DataSource } from 'typeorm';
 import { CreateUserTable1718991698597 } from './migrations/1718991698597-CreateUserTable';
 import User from 'src/modules/infra/typeorm/entities/User';
+import 'dotenv/config';
 
 export const dataSource = new DataSource({
     type: 'sqlite',

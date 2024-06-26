@@ -1,4 +1,5 @@
 import { NOT_FOUND } from "../consts/ErrorConsts";
+import { HttpStatusCode } from "../enums/HttpStatusCodes";
 
 export class NotFoundError extends Error {
   statusCode: number;
@@ -6,7 +7,7 @@ export class NotFoundError extends Error {
 
   constructor(message: string) {
     super(message);
-    this.statusCode = 404;
+    this.statusCode = HttpStatusCode.NOT_FOUND;
     this.error = NOT_FOUND;
   }
 }

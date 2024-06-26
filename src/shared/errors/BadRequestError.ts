@@ -1,4 +1,5 @@
 import { BAD_REQUEST } from "../consts/ErrorConsts";
+import { HttpStatusCode } from "../enums/HttpStatusCodes";
 
 export class BadRequestError extends Error {
   statusCode: number;
@@ -6,7 +7,7 @@ export class BadRequestError extends Error {
 
   constructor(message: string) {
     super(message);
-    this.statusCode = 400;
+    this.statusCode = HttpStatusCode.BAD_REQUEST;
     this.error = BAD_REQUEST;
   }
 }
