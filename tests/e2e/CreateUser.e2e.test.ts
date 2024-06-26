@@ -59,9 +59,9 @@ describe('CreateUserController', () => {
             password: 'teste@gmail.com',
         };
         const expectedErrorResponse: CustomError = {
-            error: BAD_REQUEST,
-            message: EMAIL_ALREADY_USED,
             statusCode: HttpStatusCode.BAD_REQUEST,
+            message: EMAIL_ALREADY_USED,
+            error: BAD_REQUEST,
         };
         await request(app)
             .post('/user')

@@ -4,7 +4,7 @@ import { ValidationError } from "src/shared/errors/ValidationError";
 describe('BadRequestError', () => {
     it('should create an instance of BadRequestError correctly', () => {
         //Arrange
-        const message = 'Invalid request error';
+        const message = ['Invalid request error'];
         //Act
         const badRequestError = new ValidationError(message);
         //Assert

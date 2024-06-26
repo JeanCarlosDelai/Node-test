@@ -5,9 +5,10 @@ import { NotFoundError } from 'src/shared/errors/NotFoundError';
 import { CustomError } from './interfaces/CustomError.interface';
 import { SOMETHING_WRONG } from 'src/shared/consts/ErrorMessagesConsts';
 import { HttpStatusCode } from 'src/shared/enums/HttpStatusCodes';
+import { ValidationError } from 'src/shared/errors/ValidationError';
 
 export const ErrorHandlerMiddleware = (
-  err: BadRequestError | NotFoundError | undefined,
+  err: BadRequestError | NotFoundError | ValidationError | undefined,
   req: Request,
   res: Response,
   next: NextFunction,
