@@ -16,7 +16,7 @@ export const userConfig = {
     globals: true,
     root: './',
     coverage: {
-      exclude: ['**/*spec.ts', '**/*.routes.ts', '**/*main.ts', '**/*app.ts', '**/*index.ts', '**/*server.ts', '**/*Table.ts', '**/*Schema.ts', '**/*.dto.ts']
+      exclude: ['**/*index.ts', '**/*server.ts', '**/*Table.ts', '**/*.dto.ts', '**/*.config.mjs']
     },
   },
 }
